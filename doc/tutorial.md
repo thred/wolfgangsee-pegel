@@ -88,3 +88,22 @@ Create a `src` directory and the `src/index.js` file with some sample content:
 **Document it:** Add TypeScript to the prequisits of the development section in the readme:
 
     * Install [TypeScript](http://www.typescriptlang.org/) using `npm install --global typescript` (as root/admin).
+
+Execute `tsc --outFile index.js --rootDir src --module AMD --moduleResolution node --sourceMap --init` to create a TypeScript porject file. It will create the `tsconfig.json` file with the following content:
+
+    {
+        "compilerOptions": {
+            "outFile": "index.js",
+            "rootDir": "src",
+            "module": "amd",
+            "moduleResolution": "node",
+            "sourceMap": true,
+            "target": "es5",
+            "noImplicitAny": false
+        },
+        "exclude": [
+            "node_modules"
+        ]
+    }
+
+**Test it:** Compile your code with `tsc` and execute it with `npm start`.
