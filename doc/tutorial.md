@@ -1,8 +1,8 @@
-# How to start a Node project with Typescript
+# How to start a Node project with TypeScript
 
 ## Prequisits
 
-Install node: [Node.js](https://nodejs.org/en/)
+Install [Node.js](https://nodejs.org/) for your OS.
 
 ## Start a Node Project
 
@@ -12,7 +12,7 @@ Create a project folder. Execute `npm init`.
       "name": "...",
       "version": "1.0.0",
       "description": "...",
-      "main": "js/index.js",
+      "main": "index.js",
       "directories": {
         "doc": "doc"
       },
@@ -25,17 +25,15 @@ Create a project folder. Execute `npm init`.
 
 This will create a `package.json` file. Add an entry to the `scripts` section, containing:
 
-    "start": "node js/index.js",
+    "start": "node index.js",
 
-Create a `js` directory and the `js/index.js` file with some sample content:
+Create the `ndex.js` file with some sample content:
 
     console.log("Sample Content!");
 
-Try it by executing `npm start`.
+**Test it:** Execute `npm start`.
 
-## Add basic documentation
-
-Create a `README.md` file.
+**Document it:** Add basic documentation by creating a `README.md` file.
 
     # ...
 
@@ -45,21 +43,19 @@ Create a `README.md` file.
 
     ### Prequisits
 
-    * [Node.js](https://nodejs.org/en/) for your OS.
+    * [Node.js](https://nodejs.org/) for your OS.
     * Install necessary dependencies with: `npm install`.
 
     ## Develoment
 
-    ### Prequisits
-
-    * [Node.js](https://nodejs.org/en/) for your OS.
-    * Install necessary dependencies with: `npm install`.
-
     ### Source
 
-    Clone from: `https://github.com/...`
+    Clone from https://github.com/...
 
-    Install the dependencies with: `npm install`
+    ### Prequisits
+
+    * [Node.js](https://nodejs.org/) for your OS.
+    * Install necessary dependencies with: `npm install`.
 
     ## License
 
@@ -73,22 +69,22 @@ Create a `README.md` file.
 
 Execute `git init` in the root directory of you project.
 
-Add all files using `git add --all` and commit them with `git commit`.
+Add all files using `git add --all` and commit them with `git commit -m "Initial commit"`.
 
 Create a new project on [Github's new project page](https://github.com/new) (no license, no readme) and copy the URL in the Quick setup section.
 
-Execute `git remote add origin <repository-URL>` with the repository URL and push your changes with `git push origin master`. To simplify things set the default upstream using `git push --set-upstream origin master`
+Execute `git remote add origin <repository-URL>` with the repository URL and push your changes with `git push --set-upstream origin master`.
 
-## Prepare Typescript
+## Prepare TypeScript
 
-Install typescript by executing `npm install -g typescript` as root/admin.
+Install typescript by executing `npm install --global typescript` as root/admin.
 
-Create a `ts` directory and the `ts/index.js` file with some sample content:
+Create a `src` directory and the `src/index.js` file with some sample content:
 
     console.log("Sample Content!");
 
-Compile the typescript code with `tsc --outDir js ts/*.ts` in the root directory of your project.
+**Test it:** Compile the typescript code with `tsc --outDir . src/*.ts` in the root directory of your project.
 
-Add Typescript to the prequisits of the development section in the readme:
+**Document it:** Add TypeScript to the prequisits of the development section in the readme:
 
-    * Install [Typescript](http://www.typescriptlang.org/) using `npm install -g typescript` (as root/admin).
+    * Install [TypeScript](http://www.typescriptlang.org/) using `npm install --global typescript` (as root/admin).
