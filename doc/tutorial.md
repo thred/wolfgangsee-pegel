@@ -46,12 +46,14 @@ Create a `README.md` file.
     ### Prequisits
 
     * [Node.js](https://nodejs.org/en/) for your OS.
+    * Install necessary dependencies with: `npm install`.
 
     ## Develoment
 
     ### Prequisits
 
     * [Node.js](https://nodejs.org/en/) for your OS.
+    * Install necessary dependencies with: `npm install`.
 
     ### Source
 
@@ -73,7 +75,9 @@ Execute `git init` in the root directory of you project.
 
 Add all files using `git add --all` and commit them with `git commit`.
 
+Create a new project on [Github's new project page](https://github.com/new) (no license, no readme) and copy the URL in the Quick setup section.
 
+Execute `git remote add origin <repository-URL>` with the repository URL and push your changes with `git push origin master`. To simplify things set the default upstream using `git push --set-upstream origin master`
 
 ## Prepare Typescript
 
