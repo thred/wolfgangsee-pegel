@@ -1,15 +1,17 @@
 {
-    "name": "wolfgangsee-pegel",
-    "version": "1.0.0",
-    "description": "Collects data from a webpage.",
-    "main": "index.js",
-    "directories": {
-        "doc": "doc"
-    },
-    "scripts": {
-        "start": "node index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "Manfred Hantschel",
-    "license": "ISC"
+  "name": "wolfgangsee-pegel",
+  "version": "1.0.0",
+  "description": "Collects data from a webpage.",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/thred/wolfgangsee-pegel",
+  "repository": "https://github.com/thred/wolfgangsee-pegel.git",
+  "author": "Manfred Hantschel",
+  "license": "ISC"
 }

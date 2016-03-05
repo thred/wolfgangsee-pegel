@@ -73,6 +73,11 @@ Add all files using `git add --all` and commit them with `git commit -m "Initial
 
 Create a new project on [Github's new project page](https://github.com/new) (no license, no readme) and copy the URL in the Quick setup section.
 
+Add the homepage and the repository to the `package.json` file by adding:
+
+    "homepage": "https://github.com/...",
+    "repository": "https://github.com/...",
+
 Execute `git remote add origin <repository-URL>` with the repository URL and push your changes with `git push --set-upstream origin master`.
 
 ## Prepare TypeScript
