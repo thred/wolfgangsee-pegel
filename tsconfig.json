@@ -9,6 +9,8 @@
         "noImplicitAny": false
     },
     "exclude": [
-        "node_modules"
+        "doc",
+        "node_modules",
+        "typings"
     ]
 }

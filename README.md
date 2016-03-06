@@ -6,7 +6,7 @@ This is a sample project for working with Node, TypeScript and a Raspberry Pi. T
 
 ## Execute
 
-### Prequisits
+### Prerequisits
 
 * You'll need [Node.js](https://nodejs.org/) for your OS.
 * Install necessary dependencies with: `npm install`.
@@ -17,10 +17,11 @@ This is a sample project for working with Node, TypeScript and a Raspberry Pi. T
 
 Clone from https://github.com/thred/wolfgangsee-pegel.git.
 
-### Prequisits
+### Prerequisits
 
 * You'll need [Node.js](https://nodejs.org/) for your OS.
 * Install [TypeScript](http://www.typescriptlang.org/) using `npm install --global typescript` (as root/admin).
+* Install [Typings](https://github.com/typings/typings) using `npm install --global typings` (as root/admin).
 * Install necessary dependencies with: `npm install`.
 * A decent editor with TypeScript support, e.g.: [Atom](https://atom.io/)
 
