@@ -69,6 +69,8 @@ Create the `ndex.js` file with some sample content:
 
 Execute `git init` in the root directory of you project.
 
+Add the `node_modules/` directory to the `.gitignore` file by executing `echo node_modules/ >> .gitignore`.
+
 Add all files using `git add --all` and commit them with `git commit -m "Initial commit"`.
 
 Create a new project on [Github's new project page](https://github.com/new) (no license, no readme) and copy the URL in the Quick setup section.
@@ -112,43 +114,3 @@ Execute `tsc --outFile index.js --rootDir src --module AMD --moduleResolution no
     }
 
 **Test it:** Compile your code with `tsc` and execute it with `npm start`.
-
-## Use Gulp as build tool
-
-We use [Gulp](http://gulpjs.com/) to automate our build process.
-
-First install the command line support for Gulp:
-
-    npm install --global gulp-cli
-
-**Document it:** Add Gulp-CLI to the prequisits of the development section in the readme:
-
-    * Install [Gulp](http://gulpjs.com/) using `npm install --global gulp-cli` (as root/admin).
-
-Add Gulp and Gulp-Typescript to the development dependencies:
-
-    npm install --save-dev gulp
-    npm install --save-dev gulp-typescript
-
-**Fix it:** Now it's time to add `node_modules` to you `.gitignore`:
-
-    echo node_modules/ >> .gitignore
-
-Create a `gulpfile.js` at the root of your project:
-
-    var gulp = require('gulp');
-    var ts = require('gulp-typescript');
-    var sourcemaps = require('gulp-sourcemaps');
-    var tsProject = ts.createProject('tsconfig.json');
-
-    gulp.task('default', function() {
-        var tsResult = tsProject.src()
-            .pipe(sourcemaps.init())
-            .pipe(ts(tsProject));
-
-        return tsResult.js
-            .pipe(sourcemaps.write())
-            .pipe(gulp.dest('.'));
-    });
-
-Execute Gulp with `gulp`.

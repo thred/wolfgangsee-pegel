@@ -21,7 +21,6 @@ Clone from https://github.com/thred/wolfgangsee-pegel.git.
 
 * You'll need [Node.js](https://nodejs.org/) for your OS.
 * Install [TypeScript](http://www.typescriptlang.org/) using `npm install --global typescript` (as root/admin).
-* Install [Gulp](http://gulpjs.com/) using `npm install --global gulp-cli` (as root/admin).
 * Install necessary dependencies with: `npm install`.
 * A decent editor with TypeScript support, e.g.: [Atom](https://atom.io/)
 
