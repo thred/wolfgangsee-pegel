@@ -1,16 +1,15 @@
 {
     "compilerOptions": {
-        "outFile": "index.js",
-        "rootDir": "src",
-        "module": "amd",
-        "moduleResolution": "node",
-        "sourceMap": true,
+        "outDir": ".",
+        "module": "commonjs",
         "target": "es5",
-        "noImplicitAny": false
+        "noImplicitAny": false,
+        "sourceMap": false
     },
     "exclude": [
-        "doc",
-        "node_modules",
-        "typings"
+        "node_modules"
+    ],
+    "files": [
+        "src/index.ts"
     ]
 }

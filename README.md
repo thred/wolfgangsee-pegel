@@ -1,6 +1,6 @@
 # Wolfgangsee Pegel
 
-Collects simple data from a webpage and stores it to a file: in this case from an automatic monitoring station in the Wolfgangsee lake.
+Extracts simple data from a webpage and stores it to a file: in this case from a monitoring station in the Wolfgangsee lake near [Strobl, Austria](https://www.openstreetmap.org/#map=14/47.7199/13.4852).
 
 This is a sample project for working with Node.js, TypeScript and a Raspberry Pi. It contains a [tutorial to create similar projects](TUTORIAL.md). 
 

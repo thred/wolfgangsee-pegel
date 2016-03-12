@@ -1,6 +1,6 @@
 # How to start a Node project with TypeScript
 
-_This tutorial covers the first steps for a Node.js project using TypeScript._
+_This tutorial covers the first steps for a Node.js project using TypeScript. You can use it as jump start for any small project using these tools. But it assumes that you have a computer with a real keyboard, an internet connection and a basic knowledge of programming._
 
 ## Prerequisits
 
@@ -26,10 +26,6 @@ And optional (you won't need them for this tutorial):
 * [linter-tidy](https://atom.io/packages/linter-tidy)
 
 But while writing this tutorial, I will give [Visual Studio Code](https://code.visualstudio.com/) a chance. I heard that Microsoft is cool again.
-
-
-
-
 
 _The tutorial will cover creating a free repository on [GitHub](https://github.com/), too. This is an optional step._
 
@@ -141,22 +137,23 @@ Create a `src` directory and the `src/index.js` file with some sample content:
 
     * Install [TypeScript](http://www.typescriptlang.org/) using `npm install --global typescript` (as root/admin).
 
-_Just like the `package.json` file defines a root directory of a Node.js project, a `tsconfig.json` file defines the rood directory of a TypeScript project. You can use the TypeScript compiler to create such a file._
+_Just like the `package.json` file defines a root directory of a Node.js project, a `tsconfig.json` file defines the root directory of a TypeScript project. You can use the TypeScript compiler to create such a file._
 
-Execute `tsc --outFile index.js --rootDir src --module AMD --moduleResolution node --sourceMap --init` to create a TypeScript porject file. It will create the `tsconfig.json` file with the following content:
+Execute `tsc --init --outDir . src/*.ts` to create a TypeScript porject file. It will create the `tsconfig.json` file with the following content:
 
     {
         "compilerOptions": {
-            "outFile": "index.js",
-            "rootDir": "src",
-            "module": "amd",
-            "moduleResolution": "node",
-            "sourceMap": true,
+            "outDir": ".",
+            "module": "commonjs",
             "target": "es5",
-            "noImplicitAny": false
+            "noImplicitAny": false,
+            "sourceMap": false
         },
         "exclude": [
             "node_modules"
+        ],
+        "files": [
+            "src/index.ts"
         ]
     }
 
@@ -184,13 +181,37 @@ Open your `index.ts` file and add the following as first line:
 
     /// <reference path="../typings/main.d.ts"/>
 
-This should work fluently, but when executing `tsc` it will throw a lot of errors. This is because of the file references in the `tsconfig.json` file: it just excludes the `node_modules` directory, this it will compile the `typings` directory, too. Simple exclude the `typings` directory, too by adding:
+Execute 'tsc' and it should work fluently.
 
-    "exclude": [
-        "node_modules",
-        "typings"
-    ]
-
-_You have completed this chapter, time to commit your changes. We will commit the `typings` directory, too, even though this is a generated directory and we don't need the files for execution. But currently, we don't have a build tool and thus no automatic process to generate the directory._
+_You have completed this short chapter, time to commit your changes. In this tutorial, we will commit the `typings` directory, too, even though this is a generated directory and we don't need the files for execution. But currently, we don't have a build tool and thus no automatic process to generate the directory._
 
 Execute `git add --all` and `git commit -m "Added Node.js type definitions"`.
+
+## Writing TypeScript code
+
+_Have a look at the page http://www.bogner-lehner.com/strobl.php. It's the webpage of a monitoring station in the Wolfgangsee lake near [Strobl, Austria](https://www.openstreetmap.org/#map=14/47.7199/13.4852). It's a service provided by the [government of Upper Austria](https://www.land-oberoesterreich.gv.at/was_internethydro_Online.htm), so I think it's ok to access it._
+
+First, start by imporing the [http module](https://nodejs.org/api/http.html) of Node.js.
+
+    /// <reference path="../typings/main.d.ts"/>
+    
+    import * as http from "http";
+
+Now you can use the http module as `http`. Next, use the get function to call the page.
+
+    http.get("http://www.bogner-lehner.com/strobl.php", (res) => {
+        console.log(`Status: ${res.statusCode} - ${res.statusMessage}`);
+
+        res.setEncoding('utf8');
+        res.on("data", (chunk) => {
+            console.log(chunk);
+        });
+
+        res.resume();
+    }).on("error", (error) => {
+        console.log(`Error: ${error.message}`);
+    });
+
+It's a common practice to access web pages in this way. Don't just copy it, try to understand it! Compile the code with `tsc` and executing it with `npm start`.
+
+If everything works fine, it should print the HTML code of the webpage to the console. Commit you code.
