@@ -10,9 +10,9 @@ Install [Node.js](https://nodejs.org/) and [Git](https://git-scm.com/) for your 
 
 For Windows users: You should consider using the Git Bash as console. Make sure, the option is checked when installing Git.
 
-_A cool editor with TypeScript support, e.g.: [Atom](https://atom.io/)_
+_Futhermore you need a cool editor with TypeScript support, e.g.: [Atom](https://atom.io/) or [Visual Studio Code](https://code.visualstudio.com/)_
 
-If you are using Atom, I would recommend the following packages:
+If you are using [Atom](https://atom.io/), I would recommend the following packages:
 
 * [atom-typescript](https://atom.io/packages/atom-typescript)
 * [atom-beautify](https://atom.io/packages/atom-beautify)
@@ -24,6 +24,12 @@ And optional (you won't need them for this tutorial):
 * [linter-jshint](https://atom.io/packages/linter-jshint)
 * [linter-jsonlint](https://atom.io/packages/linter-jsonlint)
 * [linter-tidy](https://atom.io/packages/linter-tidy)
+
+But while writing this tutorial, I will give [Visual Studio Code](https://code.visualstudio.com/) a chance. I heard that Microsoft is cool again.
+
+
+
+
 
 _The tutorial will cover creating a free repository on [GitHub](https://github.com/), too. This is an optional step._
 

@@ -1,8 +1,8 @@
 # Wolfgangsee Pegel
 
-Collects simple data from a webpage and stores it to a file.
+Collects simple data from a webpage and stores it to a file: in this case from an automatic monitoring station in the Wolfgangsee lake.
 
-This is a sample project for working with Node, TypeScript and a Raspberry Pi. The `doc` directory contains a [tutorial to create similar projects](doc/tutorial.md).
+This is a sample project for working with Node.js, TypeScript and a Raspberry Pi. It contains a [tutorial to create similar projects](TUTORIAL.md). 
 
 ## Execute
 
@@ -10,6 +10,10 @@ This is a sample project for working with Node, TypeScript and a Raspberry Pi. T
 
 * You'll need [Node.js](https://nodejs.org/) for your OS.
 * Install necessary dependencies with: `npm install`.
+
+### Run It
+
+Execute `npm start`.
 
 ## Develoment
 
@@ -23,7 +27,11 @@ Clone from https://github.com/thred/wolfgangsee-pegel.git.
 * Install [TypeScript](http://www.typescriptlang.org/) using `npm install --global typescript` (as root/admin).
 * Install [Typings](https://github.com/typings/typings) using `npm install --global typings` (as root/admin).
 * Install necessary dependencies with: `npm install`.
-* A decent editor with TypeScript support, e.g.: [Atom](https://atom.io/)
+* A decent editor with TypeScript support, e.g.: [Atom](https://atom.io/) or [Visual Studio Code](https://code.visualstudio.com/).
+
+### Compile
+
+Execute `tsc`.
 
 ## License
 
