@@ -66,7 +66,7 @@ Create the `index.js` file with some sample content, e.g.:
 
 **Test it:** Execute `npm start`.
 
-**Document it:** Add basic documentation by creating a `README.md` file.
+**Document it:** Add basic documentation by creating a `README.md` file (the format it uses is called [Markdown](https://daringfireball.net/projects/markdown/), if you need to look up the syntax).
 
     # ...
 
@@ -77,6 +77,10 @@ Create the `index.js` file with some sample content, e.g.:
     ### Prerequisits
 
     * [Node.js](https://nodejs.org/) for your OS.
+
+    ### Run It
+
+    Execute `npm start`.
 
     ## Develoment
 
@@ -187,7 +191,7 @@ _You have completed this short chapter, time to commit your changes. In this tut
 
 Execute `git add --all` and `git commit -m "Added Node.js type definitions"`.
 
-## Writing TypeScript code
+## Accessing the Server
 
 _Have a look at the page http://www.bogner-lehner.com/strobl.php. It's the webpage of a monitoring station in the Wolfgangsee lake near [Strobl, Austria](https://www.openstreetmap.org/#map=14/47.7199/13.4852). It's a service provided by the [government of Upper Austria](https://www.land-oberoesterreich.gv.at/was_internethydro_Online.htm), so I think it's ok to access it._
 
@@ -199,19 +203,68 @@ First, start by imporing the [http module](https://nodejs.org/api/http.html) of 
 
 Now you can use the http module as `http`. Next, use the get function to call the page.
 
-    http.get("http://www.bogner-lehner.com/strobl.php", (res) => {
-        console.log(`Status: ${res.statusCode} - ${res.statusMessage}`);
+    http.get("http://www.bogner-lehner.com/strobl.php", (response) => {
+        console.log(`Status: ${response.statusCode} - ${response.statusMessage}`);
 
-        res.setEncoding('utf8');
-        res.on("data", (chunk) => {
-            console.log(chunk);
+        let body = "";
+        
+        response.setEncoding('utf8');
+        
+        response.on("data", (chunk) => {
+            body += chunk;
+        });
+        
+        response.on("end", () => {
+            console.log(body);  
         });
 
-        res.resume();
+        response.resume();
     }).on("error", (error) => {
         console.log(`Error: ${error.message}`);
     });
 
-It's a common practice to access web pages in this way. Don't just copy it, try to understand it! Compile the code with `tsc` and executing it with `npm start`.
+It's a common practice to access web pages in this way. Don't just copy the code, try to understand it! 
+
+**Test it:** Compile the code with `tsc` and execute it with `npm start`.
 
 If everything works fine, it should print the HTML code of the webpage to the console. Commit you code.
+
+## Extracting the Information
+
+_The page contains the level "Wasserstand" and the temperature "Wassertemperatur". And it contains the date called "Letzte gültige Datenübertragung"._
+
+When looking at the HTML code of the page we can see, that the values are placed in div elements with an id. Let's use [regular expressions](https://en.wikipedia.org/wiki/Regular_expression) to extract the values, the page is so very static, there is no need to parse the whole HTML.
+
+_If you are not familiar with regular expressions, [learn em](http://www.regular-expressions.info/tutorial.html)._
+
+We need three expressions: 
+
+* `/<div id="Rahmen16">(.*) Uhr/g` - the date
+* `/<div id="Rahmen9"><B>(.*) cm/g` - the level
+* `/<div id="Rahmen7"><B>([^\s]*)/g` - the temperature
+
+The important parts are expressions within the parenthesis: the caputure groups. These are the values we will need. With this expressions we will cut the units, too.
+
+First, create a utility function for extracting a value:
+
+    function extract(body: string, regExp: RegExp): string {
+        let match = regExp.exec(body);
+
+        return ((match) && (match.length)) ? match[match.length - 1] : "";
+    }
+
+Then call it with the "end" event of the response:
+
+    response.on("end", () => {
+        let date = extract(body, /<div id="Rahmen16">(.*) Uhr/g);
+        let level = extract(body, /<div id="Rahmen9"><B>(.*) cm/g);
+        let temperature = extract(body, /<div id="Rahmen7"><B>([^\s]*)/g);
+
+        console.log(`Date = ${date}, Level (in cm) = ${level}, Temperature (in celsius) = ${temperature}`);
+    });
+
+**Test it:** Compile the code with `tsc` and execute it with `npm start`.
+
+If everything works fine, it should print the values to the console. Commit you code.
+
+
