@@ -304,6 +304,8 @@ _But we want to store historic values, and JSON is no good choice for this. We c
 
 Before you commit your work, make sure, that JSON and CSV files won't be committed, too. Add them to the `.gitignore` file using `echo wolfgangsee-pegel.json >> .gitignore` and `echo wolfgangsee-pegel.json >> .gitignore`.
 
+## Utilize the Raspi
+
 _And hey! Now it's time to utilize our Raspi._
 
 Let's add a [crontab](http://crontab.org/) entry for our application. It should execute it once per hour to log the values.
@@ -328,9 +330,4 @@ This will execute one minute after each full hour, every day.
 **Document it:** Document, that you can execute the application with `./wolfgangsee-pegel.sh`.
 
 Commit your work.
-
-
-
-
-
 
