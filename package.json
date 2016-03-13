@@ -2,12 +2,12 @@
   "name": "wolfgangsee-pegel",
   "version": "1.0.0",
   "description": "Collects data from a webpage.",
-  "main": "index.js",
+  "main": "wolfgangsee-pegel.js",
   "directories": {
     "doc": "doc"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node wolfgangsee-pegel.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "homepage": "https://github.com/thred/wolfgangsee-pegel",

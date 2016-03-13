@@ -45,7 +45,7 @@ Simply execute `npm init` to create the `package.json` file. Enter the necessary
       "name": "...",
       "version": "1.0.0",
       "description": "...",
-      "main": "index.js",
+      "main": "wolfgangsee-pegel.js",
       "directories": {
         "doc": "doc"
       },
@@ -58,9 +58,9 @@ Simply execute `npm init` to create the `package.json` file. Enter the necessary
 
 Now, add an entry to the `scripts` section, containing:
 
-    "start": "node index.js",
+    "start": "node wolfgangsee-pegel.js",
 
-Create the `index.js` file with some sample content, e.g.:
+Create the `wolfgangsee-pegel.js` file with some sample content, e.g.:
 
     console.log("Hello Node.js!");
 
@@ -131,11 +131,11 @@ _You will need TypeScript now. You can install it using `npm`, the package manag
 
 Install typescript by executing `npm install --global typescript` as root/admin.
 
-Create a `src` directory and the `src/index.js` file with some sample content:
+Create a `src` directory and the `src/wolfgangsee-pegel.js` file with some sample content:
 
     console.log("Hello TypeScript!");
 
-**Test it:** Compile the typescript code with `tsc --outDir . src/*.ts` in the root directory of your project. It should create the `index.js` file in the root directory of your project.
+**Test it:** Compile the typescript code with `tsc --outDir . src/*.ts` in the root directory of your project. It should create the `wolfgangsee-pegel.js` file in the root directory of your project.
 
 **Document it:** Add TypeScript to the prerequisits of the development section in the readme:
 
@@ -157,7 +157,7 @@ Execute `tsc --init --outDir . src/*.ts` to create a TypeScript porject file. It
             "node_modules"
         ],
         "files": [
-            "src/index.ts"
+            "src/wolfgangsee-pegel.ts"
         ]
     }
 
@@ -181,7 +181,7 @@ There is a module, that's called `node` - install it with `typings install node 
 
 _This will create a `typings` directory with the necessary dependencies and a `typings/main/main.d.ts` file with the reference to the dependencies. You will need to reference this `main.d.ts` file in your source files._
 
-Open your `index.ts` file and add the following as first line:
+Open your `wolfgangsee-pegel.ts` file and add the following as first line:
 
     /// <reference path="../typings/main.d.ts"/>
 
