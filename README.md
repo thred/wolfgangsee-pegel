@@ -13,7 +13,7 @@ This is a sample project for working with Node.js, TypeScript and a Raspberry Pi
 
 ### Run It
 
-Execute `npm start`.
+Execute `./wolfgangsee-pegel.sh`.
 
 ## Develoment
 

@@ -317,7 +317,18 @@ And we make it executable for all with `chmod a+x wolfgangsee-pegel.sh`.
 
 **Try it:** Execute it with `./wolfgangsee-pegel.sh`.
 
-Edit the crontab table by executing `crontab -e`.
+For adding this to the crontab, we need the full path. Execute `pwd` and copy it. Now, edit the crontab table by executing `crontab -e`. Add a new line and store it:
+
+    1 * * * * /.../wolfgangsee-pegel.sh
+    
+This will execute one minute after each full hour, every day. 
+
+**Try it:** Make a break and check the result.
+
+**Document it:** Document, that you can execute the application with `./wolfgangsee-pegel.sh`.
+
+Commit your work.
+
 
 
 
