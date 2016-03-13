@@ -219,8 +219,8 @@ Now you can use the http module as `http`. Next, use the get function to call th
         });
 
         response.resume();
-    }).on("error", (error) => {
-        console.log(`Error: ${error.message}`);
+    }).on("error", (err) => {
+        console.error("Failed to request data", err);
     });
 
 It's a common practice to access web pages in this way. Don't just copy the code, try to understand it! 
@@ -256,15 +256,70 @@ First, create a utility function for extracting a value:
 Then call it with the "end" event of the response:
 
     response.on("end", () => {
-        let date = extract(body, /<div id="Rahmen16">(.*) Uhr/g);
-        let level = extract(body, /<div id="Rahmen9"><B>(.*) cm/g);
-        let temperature = extract(body, /<div id="Rahmen7"><B>([^\s]*)/g);
+        let data = {
+            date: extract(body, /<div id="Rahmen16">(.*) Uhr/g),
+            level: extract(body, /<div id="Rahmen9"><B>(.*) cm/g),
+            temperature: extract(body, /<div id="Rahmen7"><B>([^\s]*)/g)
+        };
 
-        console.log(`Date = ${date}, Level (in cm) = ${level}, Temperature (in celsius) = ${temperature}`);
+        console.log(`Date = ${data.date}, Level (in cm) = ${data.level}, Temperature (in celsius) = ${data.temperature}`);
     });
 
 **Test it:** Compile the code with `tsc` and execute it with `npm start`.
 
 If everything works fine, it should print the values to the console. Commit you code.
+
+## Storing the Information
+
+_Let's write the information to a file; it should be easily accessible for other programs, so we will use the [JSON format](https://en.wikipedia.org/wiki/JSON)._
+
+First, you need the [fs module](https://nodejs.org/api/fs.html) of node. Add the import.
+
+    import * as fs from "fs";
+
+Then implement a method to write the JSON file:
+
+    function writeJSON(data: any): void {
+        fs.writeFile("wolfgangsee-pegel.json", JSON.stringify(data), (err) => {
+            if (err) {
+                console.error("Failed to write file", err);
+                return;
+            }
+            
+            console.log("JSON written successfully");
+        });
+    }
+
+Finally call the method in your response event handler, right after the console log.
+
+    writeJSON(data);
+
+**Test it:** Compile the code with `tsc` and execute it with `npm start`.
+
+If it works, it will write a file called "wolfgangsee-pegel.json". Look at it using `cat wolfgangsee-pegel.json`. Cool.
+
+_But we want to store historic values, and JSON is no good choice for this. We cannot append values to the file without destroying the format. Let's write another file using a [CSV format](https://en.wikipedia.org/wiki/Comma-separated_values)._
+
+**Try it:** Try this on your own. You can use the `fs.appendFile` method to append to a file.
+
+Before you commit your work, make sure, that JSON and CSV files won't be committed, too. Add them to the `.gitignore` file using `echo wolfgangsee-pegel.json >> .gitignore` and `echo wolfgangsee-pegel.json >> .gitignore`.
+
+_And hey! Now it's time to utilize our Raspi._
+
+Let's add a [crontab](http://crontab.org/) entry for our application. It should execute it once per hour to log the values.
+
+First we create a `wolfgangsee-pegel.sh` script we could easily refernce in the crontab:
+
+    #!/bin/bash
+    npm start
+    
+And we make it executable for all with `chmod a+x wolfgangsee-pegel.sh`.
+
+**Try it:** Execute it with `./wolfgangsee-pegel.sh`.
+
+Edit the crontab table by executing `crontab -e`.
+
+
+
 
 

@@ -1,9 +1,28 @@
 /// <reference path="../typings/main.d.ts"/>
 "use strict";
 var http = require("http");
+var fs = require("fs");
 function extract(body, regExp) {
     var match = regExp.exec(body);
     return ((match) && (match.length)) ? match[match.length - 1] : "";
+}
+function writeJSON(data) {
+    fs.writeFile("wolfgangsee-pegel.json", JSON.stringify(data), function (err) {
+        if (err) {
+            console.error("Failed to write file", err);
+            return;
+        }
+        console.log("JSON written successfully");
+    });
+}
+function writeCSV(data) {
+    fs.appendFile("wolfgangsee-pegel.csv", data.date + ", " + data.level + ", " + data.temperature + "\n", function (err) {
+        if (err) {
+            console.error("Failed to write file", err);
+            return;
+        }
+        console.log("CSV written successfully");
+    });
 }
 http.get("http://www.bogner-lehner.com/strobl.php", function (response) {
     console.log("Status: " + response.statusCode + " - " + response.statusMessage);
@@ -13,12 +32,16 @@ http.get("http://www.bogner-lehner.com/strobl.php", function (response) {
         body += chunk;
     });
     response.on("end", function () {
-        var date = extract(body, /<div id="Rahmen16">(.*) Uhr/g);
-        var level = extract(body, /<div id="Rahmen9"><B>(.*) cm/g);
-        var temperature = extract(body, /<div id="Rahmen7"><B>([^\s]*)/g);
-        console.log("Date = " + date + ", Level (in cm) = " + level + ", Temperature (in celsius) = " + temperature);
+        var data = {
+            date: extract(body, /<div id="Rahmen16">(.*) Uhr/g),
+            level: extract(body, /<div id="Rahmen9"><B>(.*) cm/g),
+            temperature: extract(body, /<div id="Rahmen7"><B>([^\s]*)/g)
+        };
+        console.log("Date = " + data.date + ", Level (in cm) = " + data.level + ", Temperature (in celsius) = " + data.temperature);
+        writeJSON(data);
+        writeCSV(data);
     });
     response.resume();
-}).on("error", function (error) {
-    console.log("Error: " + error.message);
+}).on("error", function (err) {
+    console.error("Failed to request data", err);
 });
