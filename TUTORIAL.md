@@ -322,9 +322,9 @@ And we make it executable for all with `chmod a+x wolfgangsee-pegel.sh`.
 For adding this to the crontab, we need the full path. Execute `pwd` and copy it. Now, edit the crontab table by executing `crontab -e`. Add a new line and store it:
 
     PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
-    1 * * * * cd <PWD-PATH> && ./wolfgangsee-pegel.sh
+    5 * * * * cd <PWD-PATH> && ./wolfgangsee-pegel.sh
    
-This will execute one minute after each full hour, every day. 
+This will execute five minutes after each full hour, every day. 
 
 **Try it:** Make a break and check the result.
 
