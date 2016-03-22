@@ -13,5 +13,8 @@
   "homepage": "https://github.com/thred/wolfgangsee-pegel",
   "repository": "https://github.com/thred/wolfgangsee-pegel.git",
   "author": "Manfred Hantschel",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "yql": "^1.0.2"
+  }
 }

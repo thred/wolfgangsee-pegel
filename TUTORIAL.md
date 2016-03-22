@@ -227,7 +227,15 @@ It's a common practice to access web pages in this way. Don't just copy the code
 
 **Test it:** Compile the code with `tsc` and execute it with `npm start`.
 
-If everything works fine, it should print the HTML code of the webpage to the console. Commit you code.
+If everything works fine, it should print the HTML code of the webpage to the console. Add a namespace around your code (after the import statement) to exercise a good code style:
+
+    namespace WolfgangseePegel {
+        ...
+    }
+    
+Have a look at the `wolfgangsee-pegel.js` file and see what the TypeScript compiler did to your code. 
+
+Commit you code.
 
 ## Extracting the Information
 
@@ -331,4 +339,85 @@ This will execute five minutes after each full hour, every day.
 **Document it:** Document, that you can execute the application with `./wolfgangsee-pegel.sh`.
 
 Commit your work.
+
+## Add weather information
+
+_That was easy. Let's add some more, weather information for example. We will use [Yahoo Weather](https://developer.yahoo.com/weather/) for this. Prepare an account, you will need an API key for this._
+
+Get an API key from [Yahoo Weather](https://developer.yahoo.com/weather/).
+
+Install the [Yahoo Query Language module](https://www.npmjs.com/package/yql) with `npm install yql --save`. This will add the dependency to the `package.json`, too. Look into the `node_modules` directory: it now contains a lot of modules. Open the `yql` module. It contains the `yql.js` file with the library code and it's `package.json` file that defines the name of module.
+
+_Next, we should install the definition file, but unfortunately Definetely Typed does not contain one (at the time of writing this tutorial). The reason for this is most likely, that the API is so very simple, you can use it untyped. But we should take this as opportunity to exercise the creation of a `.d.ts` file._ 
+
+Create a `yql.d.ts` file in your `src` folder. Open it. Split your editor and open the `yql.js` file of the node module. What you need to do, it to create typed definition of the YQL class and each public method. 
+
+_Have a look at the [documentation for creating `.d.ts` files](http://www.typescriptlang.org/Handbook#writing-dts-files). It says we should use the modules documentation instead of the `.js` file. Let's ignore this for now._  
+
+First define the module and the class:
+
+    declare module "yql" {
+
+        export class YQL {
+
+            ...
+            
+        } 
+
+    }
+
+Next, the constructor within the class:
+
+    contructor(query: string, config: {});
+    
+Leave the config variable untyped for now. We will come back to it later. 
+
+Continue with the public methods:
+
+    setParam(key: string, value: string): YQL;
+    
+    setParams(params: {[key: string]: string}): YQL;
+    
+    setConfig(key: string, value: string): YQL;
+    
+    setConfigs(params: {[key: string]: string}): YQL;
+    
+    getURL(): string;
+    
+    exec(callback: (error?: any, response?: any) => void): void;
+
+Finally you will find the default config starting around line 280. We can use this to guess the interface for the config. Add the interface after the YQL class:
+
+    export interface Config {
+        baseURL: {
+            http: string;
+            https: string;
+        }
+        env: string;
+        headers: {
+            [key: string]: string
+        }
+        ssl: boolean;
+        timeout: number;
+    }
+
+And update the constructor of the YQL class:
+
+    contructor(query: string, config?: Config);
+
+That's all. Wasn't that hard. Usually you don't need to do this by hand, but sometimes it is necessary. 
+
+_Now we will use it._
+
+Put the reference into your `wolfgangsee-pegel.ts` file:
+
+    /// <reference path="yql.d.ts"/>
+
+And import the library:
+
+    import * as yql from "yql";
+
+
+
+
 
